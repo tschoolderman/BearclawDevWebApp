@@ -19,7 +19,8 @@ namespace BearclawDevWebApp.Controllers
             _context = context;
         }
 
-        // GET: Post
+        // Route: {url}/Post
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
               return _context.Post != null ? 
@@ -27,7 +28,8 @@ namespace BearclawDevWebApp.Controllers
                           Problem("Entity set 'BearContext.Post'  is null.");
         }
 
-        // GET: Post/Details/5
+        // Route: {url}/Post/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Post == null)
@@ -45,13 +47,14 @@ namespace BearclawDevWebApp.Controllers
             return View(post);
         }
 
-        // GET: Post/Create
+        // Route: {url}/Post/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return PartialView("_CreatePartial");
         }
 
-        // POST: Post/Create
+        // Route: {url}/Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -64,10 +67,11 @@ namespace BearclawDevWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            return PartialView("_CreatePartial", post);
         }
 
-        // GET: Post/Edit/5
+        // Route: {url}/Post/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Post == null)
@@ -80,10 +84,10 @@ namespace BearclawDevWebApp.Controllers
             {
                 return NotFound();
             }
-            return View(post);
+            return PartialView(post);
         }
 
-        // POST: Post/Edit/5
+        // Route: {url}/Post/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -115,10 +119,11 @@ namespace BearclawDevWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            return PartialView(post);
         }
 
-        // GET: Post/Delete/5
+        // Route: {url}/Post/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Post == null)
@@ -133,10 +138,10 @@ namespace BearclawDevWebApp.Controllers
                 return NotFound();
             }
 
-            return View(post);
+            return PartialView(post);
         }
 
-        // POST: Post/Delete/5
+        // Route: {url}/Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -150,7 +155,7 @@ namespace BearclawDevWebApp.Controllers
             {
                 _context.Post.Remove(post);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

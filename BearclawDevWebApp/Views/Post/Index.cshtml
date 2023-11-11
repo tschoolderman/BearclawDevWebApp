@@ -11,10 +11,7 @@
             <p>This page is hooked up to a database with simple Create, Read, Update and Delete actions.</p>
             <p>Click on a title to view the contents single post.</p>
             <p>
-                <a class="btn btn-success float-right" asp-action="Create">Add New Post</a>
-                @*  <button class="btn btn-success float-right" data-bs-target="#newPost" data-bs-toggle="modal"
-                type="button">Add New Post
-                </button> *@
+                <a class="btn btn-success float-right" data-bs-target="#createPostModal" data-bs-toggle="modal">Add New Post</a>
             </p>
         </div>
         <div class="container post-table custom-smaller-div">
@@ -55,3 +52,17 @@
         </div>
     </div>
 </section>
+
+@{
+    await Html.RenderPartialAsync("_CreatePartial", new Portfolio.Models.Post());
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.get('/Post/Create', function (data)
+                $('#createPostModal').html(data);
+                $('#createPostModal').modal('show');
+        });
+    </script>
+}
