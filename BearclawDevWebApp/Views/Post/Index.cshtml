@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Portfolio.Models.Post>
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<section class="parallax-block">
+    <div class="row justify-content-center">
+        <h2>The Posts Page</h2>
+        <div class="content">
+            <p>This page is hooked up to a database with simple Create, Read, Update and Delete actions.</p>
+            <p>Click on a title to view the contents single post.</p>
+            <p>
+                <a class="btn btn-success float-right" asp-action="Create">Add New Post</a>
+                @*  <button class="btn btn-success float-right" data-bs-target="#newPost" data-bs-toggle="modal"
+                type="button">Add New Post
+                </button> *@
+            </p>
+        </div>
+        <div class="container post-table custom-smaller-div">
+            <div class="row table-header bg-dark">
+                <div class="col col1">
+                    @Html.DisplayNameFor(model => model.Id)
+                </div>
+                <div class="col col2">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
+                <div class="col col3">
+                    @Html.DisplayNameFor(model => model.Content)
+                </div>
+                <div class="col col4">
+                </div>
+            </div>
+            <div class="table-content">
+                @foreach (var item in Model)
+                {
+                    <div class="row table-row">
+                        <div class="col col1">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </div>
+                        <div class="col col2">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </div>
+                        <div class="col col3">
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </div>
+                        <div class="col col4">
+                            <a class="btn btn-secondary btn-xs" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-warning btn-xs" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

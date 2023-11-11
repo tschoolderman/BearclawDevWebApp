@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@* Specific script used only for the index page *@
+@section Scripts {
+    <script src="~/js/indexScripts.js" asp-append-version="true"></script>
+}
+
+<partial name="_ScrollProgressBar" />
+
+@* Body of the page *@
+<partial name="_IndexIntro" />
+<partial name="_IndexAbout" />
+<partial name="_IndexPortfolio" />
+<partial name="_IndexSkills" />
+<partial name="_IndexContact" />
+
+<partial name="_BackToTopButton" />
