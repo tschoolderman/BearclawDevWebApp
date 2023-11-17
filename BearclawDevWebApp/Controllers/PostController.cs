@@ -123,28 +123,7 @@ namespace BearclawDevWebApp.Controllers
         }
 
         // Route: {url}/Post/Delete/5
-        [HttpGet]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Post == null)
-            {
-                return NotFound();
-            }
-
-            var post = await _context.Post
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return PartialView(post);
-        }
-
-        // Route: {url}/Post/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (_context.Post == null)
             {
