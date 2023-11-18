@@ -12,6 +12,7 @@
             <p>Click on a title to view the contents single post.</p>
             <p>
                 <a class="btn btn-success float-right" data-bs-target="#createPostModal" data-bs-toggle="modal">Add New Post</a>
+                @await Html.PartialAsync("_CreatePartial", new Portfolio.Models.Post());
             </p>
         </div>
         <div class="container post-table custom-smaller-div">
@@ -43,9 +44,12 @@
                         </div>
                         <div class="col col4">
                             <a class="btn btn-secondary btn-xs" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-warning btn-xs" data-bs-target="@("#detailsPostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Details/{item.Id}")"> Details </a>
+                            
+                            <a class="btn btn-warning btn-xs" data-bs-target="@("#detailsPostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Details/{item.Id}")">Details</a>
                             @await Html.PartialAsync("_DetailsPartial", item)
-                            <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                            <a class="btn btn-danger btn-xs" data-bs-target="@("#deletePostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Delete/{item.Id}")">Delete</a>
+                            @await Html.PartialAsync("_DeletePartial", item)
                         </div>
                     </div>
                 }
@@ -55,6 +59,5 @@
 </section>
 
 @{
-    await Html.RenderPartialAsync("_CreatePartial", new Portfolio.Models.Post());
     await Html.RenderPartialAsync("_EditPartial", new Portfolio.Models.Post());
 }
