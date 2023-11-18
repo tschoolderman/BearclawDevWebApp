@@ -28,9 +28,9 @@ namespace BearclawDevWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Post == null)
+            if (id.Equals(null) || _context.Post == null)
             {
                 return NotFound();
             }
@@ -65,9 +65,9 @@ namespace BearclawDevWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Post == null)
+            if (id.Equals(null) || _context.Post == null)
             {
                 return NotFound();
             }
@@ -77,7 +77,7 @@ namespace BearclawDevWebApp.Controllers
             {
                 return NotFound();
             }
-            return PartialView(post);
+            return PartialView("_EditPartial", post);
         }
 
         [HttpPost]
@@ -109,7 +109,7 @@ namespace BearclawDevWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return PartialView(post);
+            return PartialView("_EditPartial", post);
         }
 
         public async Task<IActionResult> Delete(int id)

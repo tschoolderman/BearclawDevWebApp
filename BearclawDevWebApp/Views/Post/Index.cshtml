@@ -43,8 +43,9 @@
                             @Html.DisplayFor(modelItem => item.Content)
                         </div>
                         <div class="col col4">
-                            <a class="btn btn-secondary btn-xs" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            
+                            <a class="btn btn-secondary btn-xs" data-bs-target="@("#editPostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Edit/{item.Id}")">Edit</a>
+                            @await Html.PartialAsync("_EditPartial", item)
+
                             <a class="btn btn-warning btn-xs" data-bs-target="@("#detailsPostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Details/{item.Id}")">Details</a>
                             @await Html.PartialAsync("_DetailsPartial", item)
 
@@ -57,7 +58,3 @@
         </div>
     </div>
 </section>
-
-@{
-    await Html.RenderPartialAsync("_EditPartial", new Portfolio.Models.Post());
-}
