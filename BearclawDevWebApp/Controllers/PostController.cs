@@ -19,7 +19,6 @@ namespace BearclawDevWebApp.Controllers
             _context = context;
         }
 
-        // Route: {url}/Post
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -28,7 +27,6 @@ namespace BearclawDevWebApp.Controllers
                           Problem("Entity set 'BearContext.Post'  is null.");
         }
 
-        // Route: {url}/Post/Details/5
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,19 +42,15 @@ namespace BearclawDevWebApp.Controllers
                 return NotFound();
             }
 
-            return View(post);
+            return PartialView("_DetailsPartial", post);
         }
 
-        // Route: {url}/Post/Create
         [HttpGet]
         public IActionResult Create()
         {
             return PartialView("_CreatePartial");
         }
 
-        // Route: {url}/Post/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Content")] Post post)
@@ -70,7 +64,6 @@ namespace BearclawDevWebApp.Controllers
             return PartialView("_CreatePartial", post);
         }
 
-        // Route: {url}/Post/Edit/5
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,9 +80,6 @@ namespace BearclawDevWebApp.Controllers
             return PartialView(post);
         }
 
-        // Route: {url}/Post/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content")] Post post)
@@ -122,7 +112,6 @@ namespace BearclawDevWebApp.Controllers
             return PartialView(post);
         }
 
-        // Route: {url}/Post/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             if (_context.Post == null)

@@ -43,8 +43,9 @@
                         </div>
                         <div class="col col4">
                             <a class="btn btn-secondary btn-xs" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-warning btn-xs" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                            <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete @item.Id')">Delete</a>
+                            <a class="btn btn-warning btn-xs" data-bs-target="@("#detailsPostModal-" + item.Id)" data-bs-toggle="modal" data-url="@Url.Action($"Details/{item.Id}")"> Details </a>
+                            @await Html.PartialAsync("_DetailsPartial", item)
+                            <a class="btn btn-danger btn-xs" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </div>
                     </div>
                 }
@@ -55,6 +56,5 @@
 
 @{
     await Html.RenderPartialAsync("_CreatePartial", new Portfolio.Models.Post());
-    await Html.RenderPartialAsync("_DetailsPartial", new Portfolio.Models.Post());
     await Html.RenderPartialAsync("_EditPartial", new Portfolio.Models.Post());
 }
