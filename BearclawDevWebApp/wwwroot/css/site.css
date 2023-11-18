@@ -172,7 +172,6 @@ h4 {
     .table-row:nth-child(even) {
         /*        background-color: rgba(70, 90, 115, 0.2);*/
         background-color: rgb(70, 90, 115);
-        opacity: 0.2;
     }
 
 .col1,
